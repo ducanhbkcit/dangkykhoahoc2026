@@ -148,6 +148,25 @@
   </main>
 
 <script>
+(function BKCIT_SAME_ORIGIN_BRIDGE(){
+  const q=new URLSearchParams(location.search);
+  const token=q.get('__bkcit_bridge');
+  if(!token || window.parent===window) return;
+  try{
+    let b64=token.replace(/-/g,'+').replace(/_/g,'/');
+    while(b64.length%4)b64+='=';
+    const bytes=atob(b64);
+    let pct='';
+    for(let i=0;i<bytes.length;i++)pct+='%'+('00'+bytes.charCodeAt(i).toString(16)).slice(-2);
+    const payload=JSON.parse(decodeURIComponent(pct));
+    window.parent.postMessage({type:'BKCIT_REGISTRATION_RESULT',payload},location.origin);
+  }catch(err){
+    window.parent.postMessage({
+      type:'BKCIT_REGISTRATION_RESULT',
+      payload:{success:false,message:'Không đọc được phản hồi xác nhận từ máy chủ.'}
+    },location.origin);
+  }
+})();
 const SYSTEM={
   spreadsheetId:'1p3WtazZj7N5VJ6qhUqrMcsXHBpNXb2lyWaY2ASqx7lc',
   apiUrl:'https://script.google.com/macros/s/AKfycbzUP0zVdK42YdsmESV_eLHP03MRGaG8i2hHiugro4Y2keQMwfuztcY_SJI3C1KCx8bC/exec', // Khi chạy trên Google Apps Script: để trống. Khi chạy GitHub Pages: cần URL Web App đã deploy một lần.
