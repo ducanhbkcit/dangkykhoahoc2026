@@ -150,7 +150,7 @@
 <script>
 const SYSTEM={
   spreadsheetId:'1p3WtazZj7N5VJ6qhUqrMcsXHBpNXb2lyWaY2ASqx7lc',
-  apiUrl:'', // Khi chạy trên Google Apps Script: để trống. Khi chạy GitHub Pages: cần URL Web App đã deploy một lần.
+  apiUrl:'https://script.google.com/macros/s/AKfycbzUP0zVdK42YdsmESV_eLHP03MRGaG8i2hHiugro4Y2keQMwfuztcY_SJI3C1KCx8bC/exec', // Khi chạy trên Google Apps Script: để trống. Khi chạy GitHub Pages: cần URL Web App đã deploy một lần.
   source:new URLSearchParams(location.search).get('source')||'DIRECT',
   requestId:(crypto.randomUUID?crypto.randomUUID():('req-'+Date.now()+'-'+Math.random().toString(16).slice(2))),
   utmSource:new URLSearchParams(location.search).get('utm_source')||'',
